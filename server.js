@@ -1,4 +1,5 @@
 const express = require('express');
+const os = require("os")
 const app = express();
 const cors = require('cors');
 const port = 3000;
@@ -10,7 +11,7 @@ app.use(express.json());
 
 // Simple API endpoint
 app.get('/', (req, res) => {
-  res.json({ message: 'Hello from the Emmanuel slash!' });
+  res.json({ message: `Hello from server ${os.hostname()}` });
 });
 
 app.get('/api/message', (req, res) => {
