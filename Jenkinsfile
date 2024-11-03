@@ -4,25 +4,22 @@ pipeline {
     stages {
         stage("Checkout BE Repo") {
             steps {
-                git credentialsId: '408c9adc-02e5-416e-89f5-61d6bb84d44c',
-                url: 'https://github.com/thechiefishere/simple-be.git',
-                branch: 'main'
-
-                sh '''echo hello
-                pwd
-                ls'''
-
-                git credentialsId: '408c9adc-02e5-416e-89f5-61d6bb84d44c',
-                url: 'https://github.com/thechiefishere/simple-fe.git',
-                branch: 'main'
-
-                sh '''echo hello
-                pwd
-                ls'''
-
-                sh'''mkdir jbaba
-                cd jbaba
-                echo "index.html" > index.html'''
+                // Start an SSH session with your server
+                sshagent(['3.81.15.121']) {
+                    sh '''
+                    ssh -o StrictHostKeyChecking=no ec2-user@3.81.15.121 '
+                        # Navigate to the deployment directory
+                        mkdir app
+                        cd app &&
+                        
+                        # Pull latest code or files, if applicable
+                        git clone https://github.com/thechiefishere/simple-be.git &&
+                        
+                        # Install dependencies, restart services, etc.
+                        npm install &&
+                        pm2 start server.js
+                    '
+                    '''
             }
         }
     }
