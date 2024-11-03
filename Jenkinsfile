@@ -19,6 +19,10 @@ pipeline {
                 sh '''echo hello
                 pwd
                 ls'''
+
+                sh'''mkdir jbaba
+                cd jbaba
+                echo "index.html" > index.html'''
             }
         }
     }
