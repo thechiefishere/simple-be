@@ -14,11 +14,11 @@ app.get('/', (req, res) => {
   res.json({ message: `Hello from server ${os.hostname()}` });
 });
 
-app.get('/api/message', (req, res) => {
+app.get('/api/greetings', (req, res) => {
   res.json({ message: 'Hello from the backend!' });
 });
 
-app.get('/api/emmanuel-info', (req, res) => {
+app.get('/api/info', (req, res) => {
   res.json({ Name: 'Emmanuel', Age: 39, Gender: "Male", Location: "Abule Oja" });
 });
 
